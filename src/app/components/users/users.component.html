@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text"  name="name" #name="ngModel" [(ngModel)]="userService.selectedUser.name" placeholder="Nombre">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="tel"  name="phone" #phone="ngModel" [(ngModel)]="userService.selectedUser.phone" placeholder="Telefono">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="number"  name="age" #age="ngModel" [(ngModel)]="userService.selectedUser.age" placeholder="Edad">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text"  name="genre" #genre="ngModel" [(ngModel)]="userService.selectedUser.genre" placeholder="Genero">
+                            </div>
+                            <div class="input-field col s12">
+                                Fecha de Creacion:
+                                <input type="date"  name="dateCreation" #dateCreation="ngModel" [(ngModel)]="userService.selectedUser.dateCreation">
+                            </div>
+                            <div class="card action">
+                                <div class="input-field col s12">
+                                    <button class="btn" (click)="resetForm(userForm)">Limpiar</button>
+                                    <button class="btn right ngSubmit">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Edad</th>
+                    <th>Genero</th>
+                    <th>Fecha de Creacion</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userService.users">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.genre }}</td>
+                        <td>{{ user.dateCreation }}</td>
+                        <td>
+                            <a (click)="editUser(user)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="deleteUser(user._id)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
